@@ -13,16 +13,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <body>
         <h1>Abrir una cuenta bancaria</h1>
         <nav>
-            <form action="../index.html">
+            <form method="GET" action="../AbrirCuentaBancariaWeb">
                 <hr>
                 <label>Cédula del dueño de la cuenta:</label>
-                <input type="Number" placeholder="Cédula" required>
+                <input type="Number" placeholder="Cédula" name="NUMEROCUENTA" required>
                 <br><br>
                 <label>Digite el PIN:</label>
-                <input type="password" placeholder="PIN" required>
+                <input type="password" placeholder="PIN" name="PIN" required>
                 <br><br>
                 <label>Monto a depositar en ₡: </label>
-                <input type="number" placeholder="₡" required>
+                <input type="text" placeholder="₡" NAME="MONTO" required>
                 <br><br>
                 <button>Abrir</button>
             </form>

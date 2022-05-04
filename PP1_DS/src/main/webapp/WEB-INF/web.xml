@@ -6,10 +6,13 @@
         <servlet-class>conexionWeb.RegistrarClienteWeb</servlet-class>
     </servlet>
 
+
     <servlet-mapping>
         <servlet-name>RegistrarClienteWeb</servlet-name>
         <url-pattern>/RegistrarClienteWeb</url-pattern>
     </servlet-mapping>
+
+    
     <session-config>
         <session-timeout>
             30

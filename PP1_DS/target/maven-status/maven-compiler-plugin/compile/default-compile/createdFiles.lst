@@ -1,5 +1,6 @@
 vistaGUI\CambiarPin$1.class
 vistaGUI\MenuConsultas$5.class
+vistaCLI\Consola.class
 vistaGUI\Transferir.class
 vistaGUI\MenuConsultas$8.class
 vistaGUI\MenuOperaciones$3.class
@@ -18,6 +19,7 @@ vistaGUI\ConsultarEstadoCuenta$1.class
 vistaGUI\Retirar$3.class
 vistaGUI\RegistrarCliente$6.class
 vistaGUI\ConsultarTipoCambio$2.class
+util\ObtenerXML.class
 vistaGUI\ConsultarSaldo$5.class
 validaciones\ValidacionCuenta.class
 vistaGUI\RegistrarCliente$3.class
@@ -28,6 +30,7 @@ vistaGUI\MenuOperaciones.class
 vistaGUI\Transferir$1.class
 vistaGUI\PaginaPrincipal$4.class
 vistaGUI\RegistrarCliente$9.class
+util\CambioMoneda.class
 vistaGUI\ConsultarSaldo$4.class
 vistaGUI\Depositar$1.class
 vistaGUI\AbrirCuentaBancaria$3.class
@@ -37,6 +40,7 @@ vistaGUI\ConsultarGananciasTotales$2.class
 vistaGUI\Retirar$4.class
 vistaGUI\CambiarPin$3.class
 vistaGUI\RegistrarCliente$2.class
+conexionWeb\RegistrarClienteWeb.class
 vistaGUI\ConsultarStatus$2.class
 vistaGUI\AbrirCuentaBancaria.class
 vistaGUI\ConsultarGananciasTotales.class
@@ -83,6 +87,7 @@ vistaGUI\MenuPrincipal$3.class
 vistaGUI\ConsultarGananciasPorCuenta.class
 vistaGUI\ConsultarStatus$3.class
 logicadenegocios\Operacion_1.class
+util\ConexionWebService.class
 vistaGUI\ConsultarGananciasTotales$3.class
 vistaGUI\MenuPrincipal$6.class
 vistaGUI\ConsultarGananciasPorCuenta$1.class

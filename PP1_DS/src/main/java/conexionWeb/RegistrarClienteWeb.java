@@ -8,6 +8,6 @@ package conexionWeb;
  *
  * @author fabih
  */
-public class Registrado {
+public class RegistrarClienteWeb {
     
 }

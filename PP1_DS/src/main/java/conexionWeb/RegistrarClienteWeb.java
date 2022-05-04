@@ -17,13 +17,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import controlador.*;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 @WebServlet(urlPatterns = {"/RegistrarClienteWeb "})
 public class RegistrarClienteWeb extends HttpServlet {
 
-      public void doGet(HttpServletRequest request, HttpServletResponse response)
-                                   throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
     String nombre = request.getParameter("NOMBRE");
@@ -34,7 +37,7 @@ public class RegistrarClienteWeb extends HttpServlet {
     String correo = request.getParameter("CORREO");
     String dia = request.getParameter("DIA");
     String mes = request.getParameter("MES");
-    String año = request.getParameter("AÑO");
+    String anio = request.getParameter("AÑO");
     
     out.println("<!DOCTYPE html>");
     out.println("<html>");
@@ -47,10 +50,11 @@ public class RegistrarClienteWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>¡Usuario registrado!</h1>");
     out.println("<hr>");
-    out.println("Gracias por resgitrarse" + "  " + nombre + "  " + apellido1 + "  "+apellido2+"   cedula:"+cedula+"<br>" );
-    out.println("Su correo registrado es : " + "  " + correo + "<br>");
-    out.println("Su numero de telefono registrado es : " + "  " + telefono + "<br>");
-    out.println("Su fecha de nacimiento registrada es : " + dia+"/" + mes +"/"+año+ "<br>");
+        try {
+            out.println(ClienteCt.registrarCliente(apellido1, apellido2, nombre, cedula, dia, mes, anio, telefono, correo));
+        } catch (ParseException ex) {
+            Logger.getLogger(RegistrarClienteWeb.class.getName()).log(Level.SEVERE, null, ex);
+        }
     out.print("<hr><a href=\"index.html\">Volver a pagina principal</a>");
     out.println("</body></html>");
   }

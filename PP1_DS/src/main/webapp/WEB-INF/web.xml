@@ -5,18 +5,10 @@
         <servlet-name>RegistrarClienteWeb</servlet-name>
         <servlet-class>conexionWeb.RegistrarClienteWeb</servlet-class>
     </servlet>
-     <servlet>
-        <servlet-name>AbrirCuentaBancariaWeb</servlet-name>
-        <servlet-class>conexionWeb.AbrirCuentaBancariaWeb</servlet-class>
-    </servlet>
 
     <servlet-mapping>
         <servlet-name>RegistrarClienteWeb</servlet-name>
         <url-pattern>/RegistrarClienteWeb</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AbrirCuentaBancariaWeb</servlet-name>
-        <url-pattern>/AbrirCuentaBancariaWeb</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

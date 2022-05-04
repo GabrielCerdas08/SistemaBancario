@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import controlador.*;
 
 
 @WebServlet(urlPatterns = {"/AbrirCuentaBancariaWeb"})
@@ -25,7 +26,7 @@ public class AbrirCuentaBancariaWeb extends HttpServlet {
                                    throws ServletException, IOException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
-    String numerocuenta = request.getParameter("NUMEROCUENTA");
+    String identificacion = request.getParameter("NUMEROCUENTA");
     String pin = request.getParameter("PIN");
     String monto = request.getParameter("MONTO");
     
@@ -40,8 +41,7 @@ public class AbrirCuentaBancariaWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>¡Cuenta Abierta!</h1>");
     out.println("<hr>");
-    out.println("La cuenta abierta es:" + "  " + numerocuenta+"<br>" );
-    out.println("El monto es : " + "  " + monto + " COLONES"+ "<br>");
+    out.println(CuentaBancariaCt.resgistrarCuentaBancaria(monto, pin, identificacion) );
     out.print("<hr><a href=\"iniciar.html\">Volver a pagina principal</a>");
     out.println("</body></html>");
   }

@@ -42,7 +42,7 @@ public class AbrirCuentaBancariaWeb extends HttpServlet {
     out.println("<h1>¡Cuenta Abierta!</h1>");
     out.println("<hr>");
     out.println(CuentaBancariaCt.resgistrarCuentaBancaria(monto, pin, identificacion) );
-    out.print("<hr><a href=\"iniciar.html\">Volver a pagina principal</a>");
+    out.println("<hr><a href=\"iniciar.html\">Volver</a>");
     out.println("</body></html>");
   }
 

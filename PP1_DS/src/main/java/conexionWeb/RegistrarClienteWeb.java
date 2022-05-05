@@ -55,7 +55,7 @@ public class RegistrarClienteWeb extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(RegistrarClienteWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
-    out.print("<hr><a href=\"index.html\">Volver a pagina principal</a>");
+    out.println("<hr><a href=\"index.html\">Volver</a>");
     out.println("</body></html>");
   }
 

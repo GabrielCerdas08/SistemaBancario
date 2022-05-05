@@ -13,19 +13,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <body>
         <h1>Consultar tipo de cambio</h1>
         <nav>
-            <form action="../consultas.html">
+            <form method="GET" action="../../ConsultarTipoCambioWeb">
                 <hr>
                 <label>Tipo de cambio:</label>
-                <select name="divisas">
-                    <optgroup label="Divisas">
-                        <option value="dolares">Dolares</option>
-                        <option value="colones">Colones</option>
+                <select name="DIVISAS">
+                    <optgroup label="DIVISAS">
+                        <option value="1">Dolares</option>
+                        <option value="2">Colones</option>
                     </optgroup>
                 </select>
                 <br><br>
-                <label>Cambio: </label>
-                <output></output>
-                <br><br>
+
                 <button>Consultar</button>
             </form>
         </nav>

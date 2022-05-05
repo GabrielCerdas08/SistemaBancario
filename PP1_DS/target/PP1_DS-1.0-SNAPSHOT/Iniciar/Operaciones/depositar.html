@@ -13,21 +13,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <body>
         <h1>Depositar dinero a cuenta</h1>
         <nav>
-            <form action="../operaciones.html">
+            <form method="GET" action="../../DepositarWeb">
                 <hr>
                 <label>Numero de cuenta a depositar:</label>
-                <input type="Number"  required>
+                <input type="Number" NAME="NUMEROCUENTA" required>
                 <br><br>
                 <label>Divisas:</label>
-                <select name="divisas">
+                <select name="DIVISAS">
                     <optgroup label="Divisas">
-                        <option value="dolares">Dolares</option>
-                        <option value="colones">Colones</option>
+                        <option value="1">Dolares</option>
+                        <option value="2">Colones</option>
                     </optgroup>
                 </select>
                 <br><br>
                 <label>Monto: </label>
-                <input type="number"  required>
+                <input type="number" NAME="MONTO" required>
                 <br><br>
                 <button>Depositar</button>
                 

@@ -13,16 +13,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <body>
         <h1>Cambiar PIN</h1>
         <nav>
-            <form action="../index.html">
+            <form method="GET" action="../CambiarPinWeb">
                 <hr>
                 <label>Numero de cuenta a cambiar el PIN:</label>
-                <input type="Number"  required>
+                <input type="Number" name="NUMEROCUENTA" required>
                 <br><br>
                 <label>PIN actual:</label>
-                <input type="password"  required>
+                <input type="password" name="PINACTUAL" required>
                 <br><br>
                 <label>PIN nuevo: </label>
-                <input type="password"  required>
+                <input type="password" name="PINNUEVO" required>
                 <br><br>
                 <button>Cambiar</button>
             </form>

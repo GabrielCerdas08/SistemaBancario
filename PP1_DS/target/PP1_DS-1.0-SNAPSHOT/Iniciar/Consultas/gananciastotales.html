@@ -12,19 +12,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <body>
        <h1>Consultar ganancias Totales</h1>
         <nav>
-            <form action="../consultas.html">
+            <form method="GET" action="../../ConsultarGananciasTotalesWeb">
                 <hr>
                 <label>Seleccione el tipo de cuenta:</label>
-                <select name="cuentas">
-                    <optgroup label="cuentas">
-                        <option value="dolares">Dolares </option>
-                        <option value="colones">Colones </option>
+
+                <br><br><select name="CUENTA">
+                    <optgroup label="Tipos">
+                        <option value="1">Deposito </option>
+                        <option value="2">Retiro</option>
+                        <option value="3">Deposito y Retiro </option>
                     </optgroup>
                 </select>
-                <br><br>
-
-                <label>₡: </label>
-                <output></output>
                 <br><br>
                 <button>Consultar</button>
             </form>

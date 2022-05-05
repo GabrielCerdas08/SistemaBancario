@@ -13,14 +13,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <body>
        <h1>Consultar status</h1>
         <nav>
-            <form action="../consultas.html">
+            <form method="GET" action="../../ConsultarStatusWeb">
                 <hr>
                 <label>Numero de cuenta:</label>
-                <input type="Number"  required>
+                <input type="Number" name="NUMEROCUENTA"  required>
                 <br><br>
-                <label>Status: </label>
-                <output></output>
-                <br><br>
+
+
                 <button>Consultar</button>
             </form>
         </nav>

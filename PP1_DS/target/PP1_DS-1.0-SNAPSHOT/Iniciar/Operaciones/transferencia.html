@@ -9,6 +9,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="../../Inicio.css" rel="stylesheet" type="text/css"/>
+            <script type="text/javascript">
+        function obetnerdatos(){
+            var numero=document.getElementById('NUMEROCUENTA').value
+            var pin=document.getElementById('NUMEROCUENTA').value
+            
+            document.trans.NUMEROCUENTA.value = numero;
+            document.trans.PIN.value = pin;
+        }
+    </script>
     </head>
     <body>
         <h1>Tranferir dinero a cuenta</h1>
@@ -16,14 +25,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <form method="get" action="../../PalabraEnviadaWeb">
                 <hr>
                 <h2> Ingrese los datos para enviar palabra de seguridad</h2>
-                <label>Numero de cuenta del retiro:</label>
-                <input type="Number" name="NUMEROCUENTA" required>
+                <label>Numero de cuenta origen:</label>
+                <input type="Number"  name="NUMEROCUENTA" id="NUMEROCUENTA" required>
                 <br><br>
                 <label>PIN:</label>
-                <input type="password" name="PIN" required>
-                <button> Enviar Palabra </button>
+                <input type="password" name="PIN" ID="PIN" required>
+                <button type="submit" onclick="obetnerdatos()" >Enviar Palabra </button>
             </form>
-            <form method="GET" action="../../TransferirWeb">
+            <form name="trans" method="GET" action="../../TransferirWeb">
                 <hr>
                  <h2> Ingrese los datos para hacer el retiro</h2>
                 <label>Numero de cuenta origen:</label>

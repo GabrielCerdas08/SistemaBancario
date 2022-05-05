@@ -9,28 +9,42 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="../../Inicio.css" rel="stylesheet" type="text/css"/>
+        
+    <script type="text/javascript">
+        function obetnerdatos(){
+            var numero=document.getElementById('NUMEROCUENTA').value
+            var pin=document.getElementById('NUMEROCUENTA').value
+            
+            document.retiro.NUMEROCUENTA.value = numero;
+            document.retiro.PIN.value = pin;
+        }
+    </script>
     </head>
+    
+
     <body>
         <h1>Retirar dinero de cuenta</h1>
         <nav>
-            <form method="get" action="../../PalabraEnviadaWeb">
+            <form name="palabra" method="get" action="../../PalabraEnviadaWeb" oninput="resultado" >
                 <hr>
                 <h2> Ingrese los datos para enviar palabra de seguridad</h2>
                 <label>Numero de cuenta del retiro:</label>
-                <input type="Number" name="NUMEROCUENTA" required>
+                <input type="Number"  name="NUMEROCUENTA" id="NUMEROCUENTA" required>
                 <br><br>
                 <label>PIN:</label>
-                <input type="password" name="PIN" required>
-                <button> Enviar Palabra </button>
+                <input type="password" name="PIN" ID="PIN" required>
+                <button type="submit" onclick="obetnerdatos()" >Enviar Palabra </button>
             </form>
-            <form method="GET" action="../../RetirarWeb">
+            <form name="retiro" method="GET" action="../../RetirarWeb">
                 <hr>
                 <h2> Ingrese los datos para hacer el retiro</h2>
+                <br>
                 <label>Numero de cuenta del retiro:</label>
-                <input type="Number" name="NUMEROCUENTA" required>
+
+                <input type="TEXT" name="NUMEROCUENTA" id="NUMEROCUENTA" required>
                 <br><br>
                  <label>PIN:</label>
-                <input type="password" name="PIN" required>
+                <input type="password" name="PIN" id="PIN" required>
                 <br><br>
                 <label>Divisas:</label>
                 <select name="DIVISAS">

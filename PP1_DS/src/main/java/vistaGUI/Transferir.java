@@ -4,6 +4,11 @@
  */
 package vistaGUI;
 
+import controlador.ClienteCt;
+import  controlador.ClienteCt;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fabih
@@ -16,6 +21,13 @@ public class Transferir extends javax.swing.JFrame {
     public Transferir() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        ClienteCt clienteCuentas = new ClienteCt();
+        ArrayList<Integer> cuentas = clienteCuentas.numCuentas();
+        for (int i = 0; i < cuentas.size(); i++){
+            cbNumeroCuentaOrigen.addItem(String.valueOf(cuentas.get(i)));
+            cbNumeroCuentaDestino.addItem(String.valueOf(cuentas.get(i)));
+        }
     }
 
     /**
@@ -42,6 +54,7 @@ public class Transferir extends javax.swing.JFrame {
         txtPalabraClave = new javax.swing.JTextField();
         nombre3 = new javax.swing.JLabel();
         pinActual1 = new javax.swing.JLabel();
+        btSMS = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -67,7 +80,7 @@ public class Transferir extends javax.swing.JFrame {
                 btTransferirActionPerformed(evt);
             }
         });
-        getContentPane().add(btTransferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 160, 40));
+        getContentPane().add(btTransferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 160, 40));
 
         nombre.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         nombre.setText("Palabra Clave");
@@ -94,7 +107,7 @@ public class Transferir extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 120, 30));
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 120, 30));
 
         txtPin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,11 +132,29 @@ public class Transferir extends javax.swing.JFrame {
         pinActual1.setText("¢");
         getContentPane().add(pinActual1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
+        btSMS.setBackground(new java.awt.Color(0, 0, 102));
+        btSMS.setFont(new java.awt.Font("Nirmala UI", 1, 17)); // NOI18N
+        btSMS.setForeground(new java.awt.Color(255, 255, 255));
+        btSMS.setText("SMS");
+        btSMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSMSActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btSMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 130, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTransferirActionPerformed
         // TODO add your handling code here:
+        String numCuentaOrigen = cbNumeroCuentaOrigen.getSelectedItem().toString();
+        String numCuentaDestino = cbNumeroCuentaDestino.getSelectedItem().toString();
+        String pin = txtPin.getText();
+        String monto = txtMonto.getText();
+        String palabraClave = txtPalabraClave.getText();
+         ClienteCt cliente = new ClienteCt();
+        JOptionPane.showMessageDialog(null,cliente.realizarTransferencia(numCuentaOrigen,numCuentaDestino,monto,pin,palabraClave));
     }//GEN-LAST:event_btTransferirActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -134,7 +165,16 @@ public class Transferir extends javax.swing.JFrame {
 
     private void txtPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPinActionPerformed
         // TODO add your handling code here:
+        String numCuenta = cbNumeroCuentaOrigen.getSelectedItem().toString();
+        String pin = txtPin.getText();
     }//GEN-LAST:event_txtPinActionPerformed
+
+    private void btSMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSMSActionPerformed
+        String numCuentaOrigen = cbNumeroCuentaOrigen.getSelectedItem().toString();
+        String pin = txtPin.getText();
+        ClienteCt cliente = new ClienteCt();
+        JOptionPane.showMessageDialog(null,cliente.realizarTransferenciaAux(numCuentaOrigen,pin));  
+    }//GEN-LAST:event_btSMSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +213,7 @@ public class Transferir extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JButton btSMS;
     private javax.swing.JButton btTransferir;
     private javax.swing.JComboBox<String> cbNumeroCuentaDestino;
     private javax.swing.JComboBox<String> cbNumeroCuentaOrigen;

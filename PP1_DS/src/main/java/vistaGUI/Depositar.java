@@ -2,6 +2,7 @@ package vistaGUI;
 
 import controlador.ClienteCt;
 import controlador.CuentaBancariaCt;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Depositar extends javax.swing.JFrame {
@@ -9,9 +10,11 @@ public class Depositar extends javax.swing.JFrame {
     public Depositar() {
         initComponents();
         this.setLocationRelativeTo(null);
-         CuentaBancariaCt cuentas = new CuentaBancariaCt();
-        for (int i = 0; i < cuentas.numCuentas().size(); i++){
-            cbNumeroCuenta.addItem(String.valueOf(cuentas.numCuentas().get(i)));
+        
+        ClienteCt clienteCuentas = new ClienteCt();
+        ArrayList<Integer> cuentas = clienteCuentas.numCuentas();
+        for (int i = 0; i < cuentas.size(); i++){
+            cbNumeroCuenta.addItem(String.valueOf(cuentas.get(i)));
         }
     }
 
@@ -98,8 +101,9 @@ public class Depositar extends javax.swing.JFrame {
        if(cbDivisa.getSelectedItem().toString().equals("Colones")){
            JOptionPane.showMessageDialog(null,cliente.realizarDepositoColones(cbNumeroCuenta.getSelectedItem().toString(),txtMonto.getText()));   
        }
-       if(cbDivisa.getSelectedItem().toString().equals("Lolares")){
-           //DEPOSITO DOLARES  
+       if(cbDivisa.getSelectedItem().toString().equals("Dolares")){
+           //DEPOSITO DOLARES 
+           JOptionPane.showMessageDialog(null,cliente.realizarDepositoDolares(cbNumeroCuenta.getSelectedItem().toString(),txtMonto.getText())); 
        }
     }//GEN-LAST:event_btDepositarActionPerformed
 

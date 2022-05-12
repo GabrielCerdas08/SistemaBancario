@@ -3,9 +3,10 @@ package logicadenegocios;
 
 import java.util.ArrayList;
 import java.util.Date;
+import util.Comparable;
 
 
-public class Cliente {
+public class Cliente implements Comparable{
     protected String primerApellido;
     protected String segundoApellido;
     protected String nombre;
@@ -31,82 +32,63 @@ public class Cliente {
         misCuentas.add(pCuentaBancaria);
     }
     
-    public boolean menorQue(Comparable pOtroObjeto){
+    public boolean menorQue (Comparable pOtroObjeto){
         return (getPrimerApellido().compareTo(((Cliente)pOtroObjeto).getPrimerApellido())<0 ? true:false);
     }
 
-    public void cambiarPin(CuentaBancaria pCuentaBancaria, String pPin){
-        pCuentaBancaria.setPin(pPin);
-        pCuentaBancaria.agregarOperacion("Cambio de pin",0,0);
+    public void ejecutarCambioPin(CuentaBancaria pCuentaBancaria, String pPin){
+        pCuentaBancaria.cambiarPin(pPin);
     }
     
-    public String depositarColones(CuentaBancaria pCuentaBancaria, double pMontoDeposito){
-       double montoComision = pCuentaBancaria.calcularComision(pMontoDeposito);
-        pCuentaBancaria.setSaldo(pCuentaBancaria.getSaldo() + (pMontoDeposito - montoComision));
-        pCuentaBancaria.setCantidadOperacionesRetirosDepositos(pCuentaBancaria.getCantidadOperacionesRetirosDepositos() + 1);
-        pCuentaBancaria.agregarOperacion("Deposito",pMontoDeposito,montoComision);
-        return "Estimado usuario, se han depositado correctamente" + pMontoDeposito +" colones" + "\n[El monto real depositado a su cuenta " + pCuentaBancaria.getNumeroCuenta() + " es de " + pMontoDeposito + "colones]" + "\n[El monto cobrado por concepto de comisión fue de " + montoComision + "colones, que  fueron rebajados automáticamente de su saldo actual]";
+    public String ejecutarDepositoColones(CuentaBancaria pCuentaBancaria, double pMontoDeposito){
+        String msg = pCuentaBancaria.depositarColones(pMontoDeposito);
+        return msg;
     }
     
-    public String depositarDolares(CuentaBancaria pCuentaBancaria, double pMontoDeposito){
-        double montoDepositoColones = pCuentaBancaria.calcularTipoCambioCompra(pMontoDeposito);
-        double montoComision = pCuentaBancaria.calcularComision(montoDepositoColones);
-        pCuentaBancaria.setSaldo(pCuentaBancaria.getSaldo() + (montoDepositoColones - montoComision));
-        pCuentaBancaria.agregarOperacion("Deposito",montoDepositoColones,montoComision);
-        return "Estimado usuario, se han recibido correctamente" + pMontoDeposito + " dolares" + "[Según el BCCR, el tipo de cambio de compra del dólar del " + pCuentaBancaria.obtenerFechaActual() + " es: DDD.DD]" + "[El monto equivalente en colones es " + montoDepositoColones + "[El monto real depositado a su cuenta " + pCuentaBancaria.getNumeroCuenta() + " es de " + pMontoDeposito + "colones]" + "[El monto cobrado por concepto de comisión fue de " + montoComision + "colones, que  fueron rebajados automáticamente de su saldo actual]";
+    public String ejecutarDepositoDolares(CuentaBancaria pCuentaBancaria, double pMontoDeposito){
+        String msg = pCuentaBancaria.depositarDolares(pMontoDeposito);
+        return msg;
     }
     
-    public String retirarColones(CuentaBancaria pCuentaBancaria, double pMontoRetiro){
-        double montoComision = pCuentaBancaria.calcularComision(pMontoRetiro);
-        pCuentaBancaria.setSaldo(pCuentaBancaria.getSaldo() - (pMontoRetiro + montoComision));
-        pCuentaBancaria.agregarOperacion("Retiro",pMontoRetiro,montoComision);
-        return "Estimado usuario, el monto de este retiro es " + pMontoRetiro + "colones." + "\n[El monto cobrado por concepto de comisión fue de " + montoComision + "colones, que  fueron rebajados automáticamente de su saldo actual]";
+    public String ejecutarRetiroColones(CuentaBancaria pCuentaBancaria, double pMontoRetiro){
+        String msg = pCuentaBancaria.retirarColones(pMontoRetiro);
+        return msg;
     }
     
-    public String retirarDolares(CuentaBancaria pCuentaBancaria, double pMontoRetiro){
-        double montoRetiroColones = pCuentaBancaria.calcularTipoCambioVenta(pMontoRetiro);
-        double montoComision = pCuentaBancaria.calcularComision(montoRetiroColones);
-        pCuentaBancaria.setSaldo(pCuentaBancaria.getSaldo() - (montoRetiroColones + montoComision));
-        pCuentaBancaria.setCantidadOperacionesRetirosDepositos(pCuentaBancaria.getCantidadOperacionesRetirosDepositos() + 1);
-        pCuentaBancaria.agregarOperacion("Retiro",montoRetiroColones,montoComision);
-        return "Estimado usuario, el monto de este retiro es " + pMontoRetiro + "dólares." + "[Según el BCCR, el tipo de cambio de venta del dólar de hoy es:" + pCuentaBancaria.calcularTipoCambioVenta(1) + "[El monto equivalente de su retiro es " + montoRetiroColones + "colones] [El monto cobrado por concepto de comisión fue de " + montoComision + "colones, que fueron rebajados automáticamente de su saldo actual]";
+    public String ejecutarRetiroDolares(CuentaBancaria pCuentaBancaria, double pMontoRetiro){
+        String msg = pCuentaBancaria.retirarDolares(pMontoRetiro);
+        return msg;
     }
     
-    public String transferirMonto (CuentaBancaria pCuentaBancaria, double pMonto){
-        double montoComision = pCuentaBancaria.calcularComision(pMonto);
-        pCuentaBancaria.setSaldo(pCuentaBancaria.getSaldo() - (pMonto + montoComision));
-        pCuentaBancaria.agregarOperacion("Transferencia",pMonto,montoComision);
-        return "Estimado usuario, la transferencia de fondos se ejecutó satisfactoriamente. El monto retirado de la cuenta origen y depositado en la cuenta destino es " + pMonto + "colones. \n" + "[El monto cobrado por concepto de comisión a la cuenta origen fue de " + montoComision + "colones, que fueron rebajados automáticamente de su saldo actual]";
+    public String ejecutarTransferenca(CuentaBancaria pCuentaBancariaOrigen, CuentaBancaria pCuentaBancaria, double pMonto){
+        String msg = pCuentaBancariaOrigen.transferirMonto(pMonto);
+        pCuentaBancaria.depositarColones(pMonto);
+        return msg;
     }
     
-    public void depositarTransferencia(CuentaBancaria pCuentaBancaria,double pMonto){
-        pCuentaBancaria.setSaldo(pCuentaBancaria.getSaldo() + pMonto);
-        pCuentaBancaria.agregarOperacion("Deposito",pMonto,0); //No sé si es el tipo de Operación
+    public String EjecutarConsultaSaldoCuentaColones(CuentaBancaria pCuentaBancaria){
+        String msg = pCuentaBancaria.consultarSaldoCuentaColones();
+        return msg;
     }
     
-    public String consultarSaldoCuenta(CuentaBancaria pCuentaBancaria){
-        pCuentaBancaria.agregarOperacion("Consulta",0,0);
-        return "Estimado usuario el saldo actual de su cuenta es " + pCuentaBancaria.getSaldo() + "colones. ";
+    public String ejecutarConsultaSaldoCuentaDolares(CuentaBancaria pCuentaBancaria){
+        String msg = pCuentaBancaria.consultarSaldoCuentaDolares();
+        return msg;
     }
     
-    public String consultarSaldoCuentaDolares(CuentaBancaria pCuentaBancaria){
-        pCuentaBancaria.agregarOperacion("Consulta",0,0);
-        return "Estimado usuario el saldo actual de su cuenta es " + pCuentaBancaria.calcularTipoCambioCompra(pCuentaBancaria.getSaldo()) + " dólares. Para esta conversión se utilizó el tipo de cambio del dólar, precio de compra. [Según el BCCR, el tipo de cambio de compra del dólar de hoy es:" + pCuentaBancaria.calcularTipoCambioCompra(1) + "]"; 
+    public String ejecutarConsultaEstadoCuentaColones (CuentaBancaria pCuentaBancaria){
+        String msg = pCuentaBancaria.consultarEstadoCuentaColones();
+        return msg;
     }
     
-    public String consultarEstadoCuenta(CuentaBancaria pCuentaBancaria){
-        pCuentaBancaria.agregarOperacion("Consulta",0,0);
-        return "Duenio: " + pCuentaBancaria.duenio.getNombre() + pCuentaBancaria.duenio.getPrimerApellido() + "\nFecha creacion: " + pCuentaBancaria.getFechaCreacion() + "\nNumero de Cuenta: " + pCuentaBancaria.getNumeroCuenta() + "\nSaldo en colones: " + pCuentaBancaria.getSaldo();
-    }
-    
-    public String consultarEstadoCuentaDolares(CuentaBancaria pCuentaBancaria){
-        pCuentaBancaria.agregarOperacion("Consulta",0,0);
-        return "Duenio: " + pCuentaBancaria.duenio.getNombre() + pCuentaBancaria.duenio.getPrimerApellido() + "\nFecha creacion: " + pCuentaBancaria.getFechaCreacion() + "\nNumero de Cuenta: " + pCuentaBancaria.getNumeroCuenta() + "\nSaldo en dolares: " + pCuentaBancaria.calcularTipoCambioVenta(pCuentaBancaria.getSaldo());
+    public String ejecutarConsultaEstadoCuentaDolares(CuentaBancaria pCuentaBancaria){
+        String msg = pCuentaBancaria.consultarEstadoCuentaDolares();
+        return msg;
     }
 
-    public String consultarStatusCuenta(CuentaBancaria pCuentaBancaria){
-        pCuentaBancaria.agregarOperacion("Consulta",0,0);
-        return "“La cuenta número " + pCuentaBancaria.getNumeroCuenta() + "Esta Activa: " + pCuentaBancaria.isActiva();
+    public String ejecutarConsultaStatusCuenta(CuentaBancaria pCuentaBancaria){
+        String msg = pCuentaBancaria.consultarStatusCuenta();
+        return msg;
     }
         
     public void setPrimerApellido(String pPrimerApellido) {
@@ -154,7 +136,7 @@ public class Cliente {
     }
     
     public String getNombreCompleto() {
-        return nombre + " " + primerApellido + " " +segundoApellido;
+        return nombre + " " + primerApellido + " " + segundoApellido;
     }
 
     public int getIdentificacion() {
@@ -185,10 +167,14 @@ public class Cliente {
         String msg = "";
         msg += "Código Cliente: " + getCodigoCliente() + "\n";
         msg += "Identificacion: " + getIdentificacion() + "\n";
-        msg += "Nombre: " + getNombre() + " " + getPrimerApellido() + " " + getSegundoApellido() +"\n";
+        msg += "Nombre: " + getNombreCompleto()  + "\n";
         msg += "Fecha Nacimiento: " + getFechaNacimiento() + "\n";
         msg += "Numero Telefonico: " + getNumeroTelefonico() + "\n";
         msg += "Correo Electronico: " + getCorreoElectronico() + "\n";
+        msg += "Cuentas asociadas: ";
+        for (int i=0; i < misCuentas.size(); i++){
+            msg += "   " + misCuentas.get(i).getNumeroCuenta();
+        }
         return msg;
     }
     

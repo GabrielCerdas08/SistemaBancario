@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controlador.*;
+import java.util.ArrayList;
+import controlador.*;
 
 
 @WebServlet(urlPatterns = {"/ClienteConsultadoWeb"})
@@ -36,12 +38,15 @@ public class ClienteConsultadoWeb extends HttpServlet {
     out.println("<title>Cliente Consultado</title>");
     out.println("<meta charset='UTF-8'>");
     out.println("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
-    out.println("<link href='Inicio.css' rel='stylesheet' type='text/css'/>  "  );    
+    out.println("<link href='Inicio.css' rel='stylesheet' type='text/css'/>  "  );  
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>Cliente Consultado</h1>");
     out.println("<hr>");
+    ClienteCt cliente = new ClienteCt();
+    out.println(cliente.consultarCliente(numeroCedula));
 
+    
     out.println("<hr><a href=\"Iniciar/consultas.html\">Volver</a>");
     out.println("</body></html>");
   }

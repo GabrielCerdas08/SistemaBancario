@@ -42,7 +42,16 @@ public class ConsultarGananciaPorCuentaWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>Ganancia por cuenta</h1>");
     out.println("<hr>");
-
+    CuentaBancariaCt cuenta = new CuentaBancariaCt();
+    if (Integer.parseInt(tipoCuenta) == 1){
+        out.println(cuenta.consultarGananciasDepositosCuenta(numeroCuenta));
+    }
+    else if (Integer.parseInt(tipoCuenta) == 2){
+        out.println(cuenta.consultarGananciasRetirosCuenta(numeroCuenta));
+    }
+    else{
+        out.println(cuenta.consultarGananciasTotalesCuenta(numeroCuenta));
+    }
     out.println("<hr><a href=\"Iniciar/consultas.html\">Volver</a>");
     out.println("</body></html>");
   }

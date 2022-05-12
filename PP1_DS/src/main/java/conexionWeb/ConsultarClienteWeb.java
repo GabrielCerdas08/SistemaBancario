@@ -4,8 +4,10 @@
  */
 package conexionWeb;
 
+import controlador.ClienteCt;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,10 +45,15 @@ public class ConsultarClienteWeb extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Consultar Cliente</h1>\n" +
 "        <nav>");
-            out.println(" <details>\n" +
-"  <summary>Lista de clientes</summary>\n" +
-"  <p>"+ holaaa +"</p>\n" +
-"</details> ");
+            out.println(" <details>\n" + "  <summary>Lista de clientes</summary>\n" +
+            "  <p>"+ "</p>\n" + "</details> ");
+            
+        ClienteCt datosClientes = new ClienteCt();
+        ArrayList<String> listaDatos = datosClientes.listarClientes();   
+        for (int i = 0; i < listaDatos.size(); i++){
+            out.println(" <details>\n" + "  <p>"+ listaDatos.get(i) +"</p>\n" + "</details> ");
+        }
+
             out.println("<form METHOD=\"GET\" action=\"ClienteConsultadoWeb\">\n" +
 "                <hr>\n" +
 "                <label>Numero de cedula :</label>\n" +
@@ -57,6 +64,7 @@ public class ConsultarClienteWeb extends HttpServlet {
 "        </nav>\n" +
 "        <hr>\n" +
 "        <a href=\"Iniciar/consultas.html\">Volver</a>" );
+            out.println("<link href='Inicio.css' rel='stylesheet' type='text/css'/>  "  ); 
             out.println("</body>");
             out.println("</html>");
         }

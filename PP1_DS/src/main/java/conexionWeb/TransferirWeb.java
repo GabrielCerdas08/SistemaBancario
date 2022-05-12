@@ -29,9 +29,9 @@ public class TransferirWeb extends HttpServlet {
     String numeroCuenta = request.getParameter("NUMEROCUENTA");
     String numeroCuentaDestino = request.getParameter("NUMEROCUENTADES");
     String pin = request.getParameter("PIN");
-    String Palabra = request.getParameter("PALABRA");
+    String palabra = request.getParameter("PALABRA");
     String monto = request.getParameter("MONTO");
-    
+    ClienteCt cliente = new ClienteCt();
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
@@ -43,7 +43,7 @@ public class TransferirWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>¡Transferencia Realizada!</h1>");
     out.println("<hr>");
-
+    out.println(cliente.realizarTransferencia(numeroCuenta, numeroCuentaDestino, monto, pin, palabra));
     out.println("<hr><a href=\"Iniciar/operaciones.html\">Volver</a>");
     out.println("</body></html>");
   }

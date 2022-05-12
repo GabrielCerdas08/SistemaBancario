@@ -4,8 +4,8 @@ package seguridad;
 import java.util.ArrayList;
 import logicadenegocios.CuentaBancaria;
 import logicadenegocios.Cliente;
-import util.CorreoElectronico;
-import util.MensajeSMS;
+import comunicacionExterna.CorreoElectronico;
+import comunicacionExterna.MensajeSMS;
 public class CuentaBancariaSc {
     
     //autenticación para iniciar operaciones en cuentas
@@ -39,7 +39,7 @@ public class CuentaBancariaSc {
     public static boolean autenticarNumCuenta(int pNumCuenta,ArrayList<Cliente>clientes){
             for (int i = 0; i < clientes.size(); i++){
                 for (int j=0; j < clientes.get(i).getMisCuentas().size(); j++){
-                    if (clientes.get(i).getMisCuentas().get(j).getNumeroCuenta() == pNumCuenta && clientes.get(i).getMisCuentas().get(j).isActiva()== true){
+                    if (clientes.get(i).getMisCuentas().get(j).getNumeroCuenta() == pNumCuenta && clientes.get(i).getMisCuentas().get(j).isActiva().equals("Activa")){
                         return true;
                     }
                 }

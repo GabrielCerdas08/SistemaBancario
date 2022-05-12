@@ -4,6 +4,8 @@
  */
 package vistaGUI;
 
+import controlador.ClienteCt;
+
 /**
  *
  * @author fabih
@@ -32,9 +34,9 @@ public class ConsultarTipoCambio extends javax.swing.JFrame {
         btConsultar = new javax.swing.JButton();
         back = new javax.swing.JButton();
         cbDivisa = new javax.swing.JComboBox<>();
-        txtColon = new javax.swing.JPasswordField();
         pinActual1 = new javax.swing.JLabel();
         nombre1 = new javax.swing.JLabel();
+        txtColon = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -81,14 +83,6 @@ public class ConsultarTipoCambio extends javax.swing.JFrame {
         });
         getContentPane().add(cbDivisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 360, 30));
 
-        txtColon.setEnabled(false);
-        txtColon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtColonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtColon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 280, 30));
-
         pinActual1.setFont(new java.awt.Font("Nirmala UI", 1, 36)); // NOI18N
         pinActual1.setText("¢");
         getContentPane().add(pinActual1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
@@ -97,11 +91,29 @@ public class ConsultarTipoCambio extends javax.swing.JFrame {
         nombre1.setText("Seleccione el tipo de consulta");
         getContentPane().add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, -1));
 
+        txtColon.setEditable(false);
+        txtColon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtColonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtColon, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 310, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         // TODO add your handling code here:
+        String tipoCambio = cbDivisa.getSelectedItem().toString();
+        ClienteCt cliente = new ClienteCt();
+        double valor=0;
+        if (tipoCambio.equals("Compra")){
+            valor = cliente.consultarTipoCambioCompra();
+        }
+        if (tipoCambio.equals("Venta")){
+            valor = cliente.consultarTipoCambioVenta();
+        }
+        txtColon.setText(String.valueOf(valor));
     }//GEN-LAST:event_btConsultarActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -115,7 +127,7 @@ public class ConsultarTipoCambio extends javax.swing.JFrame {
     }//GEN-LAST:event_cbDivisaActionPerformed
 
     private void txtColonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtColonActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtColonActionPerformed
 
     /**
@@ -161,6 +173,6 @@ public class ConsultarTipoCambio extends javax.swing.JFrame {
     private javax.swing.JLabel linea;
     private javax.swing.JLabel nombre1;
     private javax.swing.JLabel pinActual1;
-    private javax.swing.JPasswordField txtColon;
+    private javax.swing.JTextField txtColon;
     // End of variables declaration//GEN-END:variables
 }

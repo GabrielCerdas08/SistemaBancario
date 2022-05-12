@@ -2,6 +2,7 @@
 package validaciones;
 
 import logicadenegocios.CuentaBancaria;
+
 public class ValidacionCuenta {
     public static boolean validarPin(String pPin){
        //requisitos del pin
@@ -40,7 +41,15 @@ public class ValidacionCuenta {
         }else{
             return false;
         }   
+    } 
+    
+    public static boolean validarCobroComision (int cantidadComisiciones){
+        if (cantidadComisiciones < 3){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-   
     
 }

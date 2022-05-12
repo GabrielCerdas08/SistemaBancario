@@ -27,7 +27,6 @@ public class RetirarWeb extends HttpServlet {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
     String numeroCuenta = request.getParameter("NUMEROCUENTA");
-    String pin = request.getParameter("PIN");
     String divisa = request.getParameter("DIVISAS");
     String monto = request.getParameter("MONTO");
     String palabra = request.getParameter("PALABRA");
@@ -43,7 +42,15 @@ public class RetirarWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>¡Dinero Retirado!</h1>");
     out.println("<hr>");
-
+    
+    ClienteCt cliente = new ClienteCt();
+    if (Integer.parseInt(divisa) == 1){
+        out.println(cliente.realizarRetiroDolares(numeroCuenta, monto, palabra, PalabraEnviadaWeb.pPalabra));
+    }
+    else{
+        out.println(cliente.realizarRetiroColones(numeroCuenta, monto, palabra, PalabraEnviadaWeb.pPalabra));
+    }
+    
     out.println("<hr><a href=\"Iniciar/operaciones.html\">Volver</a>");
     out.println("</body></html>");
   }

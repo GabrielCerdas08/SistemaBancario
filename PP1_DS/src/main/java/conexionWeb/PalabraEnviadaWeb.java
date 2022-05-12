@@ -24,17 +24,17 @@ public class PalabraEnviadaWeb extends HttpServlet {
 
     static String numeroCuenta1;
     static String pin1;
-
+    static String pPalabra;
 
       public void doGet(HttpServletRequest request, HttpServletResponse response)
                                    throws ServletException, IOException {
+      
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
     String numeroCuenta1 = request.getParameter("NUMEROCUENTA");
     String pin1 = request.getParameter("PIN");
-
-    
-
+    ClienteCt cliente = new ClienteCt();
+    pPalabra = cliente.realizarRetiroColonesAux(numeroCuenta1, pin1);
     
     out.println("<!DOCTYPE html>");
     out.println("<html>");
@@ -46,7 +46,7 @@ public class PalabraEnviadaWeb extends HttpServlet {
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>¡Palabra enviada!</h1>");
-    out.println("<hr>");
+    out.println("Se ha enviado una palabra clase por mensaje a su celular." + pPalabra);
     out.println("</body></html>");
   }
 }

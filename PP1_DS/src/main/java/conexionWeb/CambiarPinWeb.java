@@ -29,7 +29,7 @@ public class CambiarPinWeb extends HttpServlet {
     String numeroCuenta = request.getParameter("NUMEROCUENTA");
     String pinActual = request.getParameter("PINACTUAL");
     String pinNuevo = request.getParameter("PINNUEVO");
-    
+    ClienteCt cliente = new ClienteCt();
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
@@ -41,7 +41,7 @@ public class CambiarPinWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>¡Pin Cambiado!</h1>");
     out.println("<hr>");
-   
+    out.println(cliente.cambiarPin(numeroCuenta, pinActual, pinNuevo));
     out.println("<hr><a href=\"iniciar.html\">Volver</a>");
     out.println("</body></html>");
   }

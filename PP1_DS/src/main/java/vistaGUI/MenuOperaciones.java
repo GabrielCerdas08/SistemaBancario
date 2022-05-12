@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package vistaGUI;
 
-/**
- *
- * @author fabih
- */
+import controlador.ActualizacionDatos;
+import controlador.ClienteCt;
 public class MenuOperaciones extends javax.swing.JFrame {
 
     /**
@@ -15,6 +10,7 @@ public class MenuOperaciones extends javax.swing.JFrame {
      */
     public MenuOperaciones() {
         initComponents();
+        ActualizacionDatos.refrescarPrograma();
         this.setLocationRelativeTo(null);
     }
 

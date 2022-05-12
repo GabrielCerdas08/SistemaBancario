@@ -19,6 +19,7 @@ public class ValidacionFormato {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         formatoFecha.setLenient(false);
         formatoFecha.parse(pDia + "/" + pMes + "/" + pAnio);
+        System.out.println(formatoFecha.toString());
         return true;
        } catch (ParseException e) {
           return false;
@@ -29,4 +30,5 @@ public class ValidacionFormato {
         Date simpleDateFormat  = new Date(pDia+"/"+pMes+"/"+ pAnio);
         return simpleDateFormat;
     }
+    
 }

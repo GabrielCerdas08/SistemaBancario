@@ -4,6 +4,10 @@
  */
 package vistaGUI;
 
+import controlador.ClienteCt;
+import controlador.CuentaBancariaCt;
+import java.util.ArrayList;
+
 /**
  *
  * @author fabih
@@ -16,6 +20,12 @@ public class ConsultarGananciasPorCuenta extends javax.swing.JFrame {
     public ConsultarGananciasPorCuenta() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        ClienteCt clienteCuentas = new ClienteCt();
+        ArrayList<Integer> cuentas = clienteCuentas.numCuentas();
+        for (int i = 0; i < cuentas.size(); i++){
+            cbNumeroCuenta.addItem(String.valueOf(cuentas.get(i)));
+        }
     }
 
     /**
@@ -32,11 +42,11 @@ public class ConsultarGananciasPorCuenta extends javax.swing.JFrame {
         btConsultar = new javax.swing.JButton();
         back = new javax.swing.JButton();
         cbGanancias = new javax.swing.JComboBox<>();
-        txtGanancias = new javax.swing.JPasswordField();
         pinActual1 = new javax.swing.JLabel();
         nombre1 = new javax.swing.JLabel();
         cbNumeroCuenta = new javax.swing.JComboBox<>();
         nombre2 = new javax.swing.JLabel();
+        txtGanancias = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -83,14 +93,6 @@ public class ConsultarGananciasPorCuenta extends javax.swing.JFrame {
         });
         getContentPane().add(cbGanancias, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 240, 30));
 
-        txtGanancias.setEnabled(false);
-        txtGanancias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGananciasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtGanancias, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 340, 30));
-
         pinActual1.setFont(new java.awt.Font("Nirmala UI", 1, 36)); // NOI18N
         pinActual1.setText("¢");
         getContentPane().add(pinActual1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
@@ -111,11 +113,27 @@ public class ConsultarGananciasPorCuenta extends javax.swing.JFrame {
         nombre2.setText("Seleccione el tipo de consulta");
         getContentPane().add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
+        txtGanancias.setEditable(false);
+        getContentPane().add(txtGanancias, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 320, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
-        // TODO add your handling code here:
+        CuentaBancariaCt cuenta = new CuentaBancariaCt();
+        
+        String tipoGanancia = cbGanancias.getSelectedItem().toString();
+        String pNumCuenta = cbNumeroCuenta.getSelectedItem().toString();
+        
+        if (tipoGanancia.equals("Depositos")){
+            txtGanancias.setText(cuenta.consultarGananciasDepositosCuenta(pNumCuenta));
+        }
+        if (tipoGanancia.equals("Retiros")){
+            txtGanancias.setText(cuenta.consultarGananciasRetirosCuenta(pNumCuenta));
+        }
+        if (tipoGanancia.equals("Depositos y retiros")){
+            txtGanancias.setText(cuenta.consultarGananciasTotalesCuenta(pNumCuenta));
+        }
     }//GEN-LAST:event_btConsultarActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -127,10 +145,6 @@ public class ConsultarGananciasPorCuenta extends javax.swing.JFrame {
     private void cbGananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGananciasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbGananciasActionPerformed
-
-    private void txtGananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGananciasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGananciasActionPerformed
 
     private void cbNumeroCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNumeroCuentaActionPerformed
         // TODO add your handling code here:
@@ -181,6 +195,6 @@ public class ConsultarGananciasPorCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel nombre1;
     private javax.swing.JLabel nombre2;
     private javax.swing.JLabel pinActual1;
-    private javax.swing.JPasswordField txtGanancias;
+    private javax.swing.JTextField txtGanancias;
     // End of variables declaration//GEN-END:variables
 }

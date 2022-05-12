@@ -4,6 +4,9 @@
  */
 package vistaGUI;
 
+import controlador.ActualizacionDatos;
+import controlador.ClienteCt;
+
 /**
  *
  * @author fabih
@@ -14,6 +17,7 @@ public class MenuConsultas extends javax.swing.JFrame {
      * Creates new form MenuConsultas
      */
     public MenuConsultas() {
+        ActualizacionDatos.refrescarPrograma();
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -157,11 +161,15 @@ public class MenuConsultas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConsultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarClienteActionPerformed
-
+        ListarClientesOrdenados abrir = new ListarClientesOrdenados();
+        abrir.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btConsultarClienteActionPerformed
 
     private void btConsultarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarCuentaActionPerformed
-
+        ListarCuentasOrdenadas abrir = new ListarCuentasOrdenadas();
+        abrir.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btConsultarCuentaActionPerformed
 
     private void btConsultarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarSaldoActionPerformed

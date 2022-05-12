@@ -29,7 +29,7 @@ public class DepositarWeb extends HttpServlet {
     String numeroCuenta = request.getParameter("NUMEROCUENTA");
     String divisa = request.getParameter("DIVISAS");
     String monto = request.getParameter("MONTO");
-
+    ClienteCt cliente = new ClienteCt();
     
     out.println("<!DOCTYPE html>");
     out.println("<html>");
@@ -43,6 +43,13 @@ public class DepositarWeb extends HttpServlet {
     out.println("<h1>¡Dinero Depositado!</h1>");
     out.println("<hr>");
 
+    if (Integer.parseInt(divisa) == 1){
+        out.println(cliente.realizarDepositoDolares (numeroCuenta, monto));
+    }
+    else{
+        out.println(cliente.realizarDepositoColones (numeroCuenta, monto));
+    }
+        
     out.println("<hr><a href=\"Iniciar/operaciones.html\">Volver</a>");
     out.println("</body></html>");
   }

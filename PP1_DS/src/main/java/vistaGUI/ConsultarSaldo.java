@@ -4,6 +4,10 @@
  */
 package vistaGUI;
 
+import controlador.ClienteCt;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fabih
@@ -16,6 +20,12 @@ public class ConsultarSaldo extends javax.swing.JFrame {
     public ConsultarSaldo() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        ClienteCt clienteCuentas = new ClienteCt();
+        ArrayList<Integer> cuentas = clienteCuentas.numCuentas();
+        for (int i = 0; i < cuentas.size(); i++){
+            cbNumeroCuenta.addItem(String.valueOf(cuentas.get(i)));
+        }
     }
 
     /**
@@ -29,14 +39,10 @@ public class ConsultarSaldo extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         linea = new javax.swing.JLabel();
-        pinActual = new javax.swing.JLabel();
         btConsultar = new javax.swing.JButton();
         back = new javax.swing.JButton();
         nombre = new javax.swing.JLabel();
         cbDivisa = new javax.swing.JComboBox<>();
-        txtDolar = new javax.swing.JTextField();
-        txtColon = new javax.swing.JPasswordField();
-        pinActual1 = new javax.swing.JLabel();
         cbNumeroCuenta = new javax.swing.JComboBox<>();
         nombre1 = new javax.swing.JLabel();
         txtPin = new javax.swing.JPasswordField();
@@ -57,10 +63,6 @@ public class ConsultarSaldo extends javax.swing.JFrame {
         linea.setText("______________________________");
         getContentPane().add(linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 30, 580, 50));
 
-        pinActual.setFont(new java.awt.Font("Nirmala UI", 1, 34)); // NOI18N
-        pinActual.setText("$");
-        getContentPane().add(pinActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, -1));
-
         btConsultar.setBackground(new java.awt.Color(0, 0, 102));
         btConsultar.setFont(new java.awt.Font("Nirmala UI", 1, 17)); // NOI18N
         btConsultar.setForeground(new java.awt.Color(255, 255, 255));
@@ -70,7 +72,7 @@ public class ConsultarSaldo extends javax.swing.JFrame {
                 btConsultarActionPerformed(evt);
             }
         });
-        getContentPane().add(btConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 160, 40));
+        getContentPane().add(btConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 160, 40));
 
         back.setBackground(new java.awt.Color(0, 102, 51));
         back.setFont(new java.awt.Font("Nirmala UI", 1, 16)); // NOI18N
@@ -95,26 +97,6 @@ public class ConsultarSaldo extends javax.swing.JFrame {
         });
         getContentPane().add(cbDivisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 210, 30));
 
-        txtDolar.setEnabled(false);
-        txtDolar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDolarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtDolar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 160, 30));
-
-        txtColon.setEnabled(false);
-        txtColon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtColonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtColon, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 160, 30));
-
-        pinActual1.setFont(new java.awt.Font("Nirmala UI", 1, 36)); // NOI18N
-        pinActual1.setText("¢");
-        getContentPane().add(pinActual1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
-
         cbNumeroCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         getContentPane().add(cbNumeroCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 450, 30));
 
@@ -132,6 +114,18 @@ public class ConsultarSaldo extends javax.swing.JFrame {
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         // TODO add your handling code here:
+        ClienteCt cliente = new ClienteCt();
+        String numCuenta = cbNumeroCuenta.getSelectedItem().toString();
+        String tipoDivisa = cbDivisa.getSelectedItem().toString();
+        String pin = txtPin.getText();
+        
+        if (tipoDivisa.equals("Colones")){
+            JOptionPane.showMessageDialog(null,cliente.consultarSaldoCuentaColones(numCuenta,pin));   
+        }
+        if (tipoDivisa.equals("Dolares")){
+            JOptionPane.showMessageDialog(null,cliente.consultarSaldoCuentaDolares(numCuenta,pin));
+        }
+        
     }//GEN-LAST:event_btConsultarActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -139,14 +133,6 @@ public class ConsultarSaldo extends javax.swing.JFrame {
         abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_backActionPerformed
-
-    private void txtDolarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDolarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDolarActionPerformed
-
-    private void txtColonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtColonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtColonActionPerformed
 
     private void cbDivisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDivisaActionPerformed
         // TODO add your handling code here:
@@ -197,10 +183,6 @@ public class ConsultarSaldo extends javax.swing.JFrame {
     private javax.swing.JLabel nombre;
     private javax.swing.JLabel nombre1;
     private javax.swing.JLabel nombre2;
-    private javax.swing.JLabel pinActual;
-    private javax.swing.JLabel pinActual1;
-    private javax.swing.JPasswordField txtColon;
-    private javax.swing.JTextField txtDolar;
     private javax.swing.JPasswordField txtPin;
     // End of variables declaration//GEN-END:variables
 }

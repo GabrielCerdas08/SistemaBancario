@@ -22,7 +22,7 @@ import controlador.*;
 @WebServlet(urlPatterns = {"/AbrirCuentaBancariaWeb"})
 public class AbrirCuentaBancariaWeb extends HttpServlet {
 
-      public void doGet(HttpServletRequest request, HttpServletResponse response)
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
                                    throws ServletException, IOException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();

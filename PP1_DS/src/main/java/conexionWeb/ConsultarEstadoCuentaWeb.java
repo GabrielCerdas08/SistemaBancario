@@ -42,7 +42,14 @@ public class ConsultarEstadoCuentaWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>Estado de Cuenta</h1>");
     out.println("<hr>");
-
+    ClienteCt cliente = new ClienteCt();
+    if (Integer.parseInt(divisa) == 1){
+        out.println(cliente.consultarEstadoCuentaDolares (numeroCuenta, pin));
+    }
+    else{
+        out.println(cliente.consultarEstadoCuentaColones (numeroCuenta, pin));
+    }
+        
     out.println("<hr><a href=\"Iniciar/consultas.html\">Volver</a>");
     out.println("</body></html>");
   }

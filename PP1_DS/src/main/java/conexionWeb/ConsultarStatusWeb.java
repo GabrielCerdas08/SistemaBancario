@@ -27,7 +27,7 @@ public class ConsultarStatusWeb extends HttpServlet {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
     String numeroCuenta = request.getParameter("NUMEROCUENTA");
-
+    ClienteCt cliente = new ClienteCt();
 
     
     out.println("<!DOCTYPE html>");
@@ -41,6 +41,8 @@ public class ConsultarStatusWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>Status</h1>");
     out.println("<hr>");
+
+    out.println(cliente.consultarStatusCuenta (numeroCuenta));
 
     out.println("<hr><a href=\"Iniciar/consultas.html\">Volver</a>");
     out.println("</body></html>");

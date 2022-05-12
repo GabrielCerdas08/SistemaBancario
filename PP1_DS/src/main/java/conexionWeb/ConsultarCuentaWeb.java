@@ -4,8 +4,10 @@
  */
 package conexionWeb;
 
+import controlador.CuentaBancariaCt;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,12 +44,16 @@ public class ConsultarCuentaWeb extends HttpServlet {
             
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Consultar Cuenta</h1>\n" +
-"        <nav>");
-            out.println(" <details>\n" +
-"  <summary>Lista de clientes</summary>\n" +
-"  <p>"+ holaaa +"</p>\n" +
-"</details> ");
+            out.println("<h1>Consultar Cuenta</h1>\n" + "        <nav>");
+            out.println(" <details>\n" + "  <summary>Lista de cuentas</summary>\n" +
+            "  <p>"+ "</p>\n" + "</details> ");
+            
+        CuentaBancariaCt datosCuentas = new CuentaBancariaCt();
+        ArrayList<String> listaDatos = datosCuentas.listarCuentas();
+        for (int i = 0; i < listaDatos.size(); i++){
+            out.println(" <details>\n" + "  <p>"+ listaDatos.get(i) +"</p>\n" + "</details> ");
+        }        
+        
             out.println("<form METHOD=\"GET\" action=\"CuentaConsultadaWeb\">\n" +
 "                <hr>\n" +
 "                <label>Numero de cuenta :</label>\n" +
@@ -58,6 +64,7 @@ public class ConsultarCuentaWeb extends HttpServlet {
 "        </nav>\n" +
 "        <hr>\n" +
 "        <a href=\"Iniciar/consultas.html\">Volver</a>" );
+            out.println("<link href='Inicio.css' rel='stylesheet' type='text/css'/>  "  ); 
             out.println("</body>");
             out.println("</html>");
         }

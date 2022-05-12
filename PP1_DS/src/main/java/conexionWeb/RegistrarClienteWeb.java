@@ -1,14 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package conexionWeb;
-
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,6 +12,8 @@ import controlador.*;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.*;
+
 
 
 @WebServlet(urlPatterns = {"/RegistrarClienteWeb "})
@@ -51,7 +44,8 @@ public class RegistrarClienteWeb extends HttpServlet {
     out.println("<h1>¡Usuario registrado!</h1>");
     out.println("<hr>");
         try {
-            out.println(ClienteCt.registrarCliente(apellido1, apellido2, nombre, cedula, dia, mes, anio, telefono, correo));
+            ClienteCt cliente = new ClienteCt();
+            out.println(cliente.registrarCliente(apellido1, apellido2, nombre, cedula, dia, mes, anio, telefono, correo));
         } catch (ParseException ex) {
             Logger.getLogger(RegistrarClienteWeb.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vistaGUI;
-
+import controlador.ActualizacionDatos;
+import controlador.ClienteCt;
 /**
  *
  * @author fabih
@@ -15,6 +16,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        ActualizacionDatos .refrescarPrograma();
         this.setLocationRelativeTo(null);
     }
 

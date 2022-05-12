@@ -1,22 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package vistaCLI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.io.IOException;
-import logicadenegocios.*;
 import controlador.*;
 import java.text.ParseException;
-import validaciones.*;
+import java.util.ArrayList;
 
-/**
- *
- * @author fabih
- */
+
+
 public class Consola {
     static BufferedReader in;
     static PrintStream out; 
@@ -33,6 +27,7 @@ public class Consola {
     }
  
     static void paginaPrincipal() throws IOException, ParseException {
+       ActualizacionDatos.refrescarPrograma();
         boolean salir = false;
         while (!salir) {
             System.out.println("\n------------ BIENVENIDO AL SISTEMA BANCARIO NACIONAL ------------");
@@ -47,10 +42,11 @@ public class Consola {
     }
     
     static Boolean opcionElegidaPaginaPrincipal() throws java.io.IOException, ParseException{
+        ActualizacionDatos.refrescarPrograma();
         int opcion;
         try{
+            System.out.println("\nSeleccione la accion que desea realizar: ");
             Scanner entrada = new Scanner(System.in);
-            System.out.print("\nSeleccione la accion que desea realizar: "); 
             opcion = entrada.nextInt();           
         }catch (Exception e) {opcion = 17;}
         switch (opcion) {
@@ -75,7 +71,7 @@ public class Consola {
             Scanner entrada = new Scanner(System.in);
             System.out.println("  1. Dolar");
             System.out.println("  2. Colon");
-            System.out.print("Ingrese la divisa que desea utilizar: ");
+            System.out.println("\nIngrese la divisa que desea utilizar: ");
             divisa = entrada.nextInt();
             return divisa;
         } catch (Exception e) {divisa = 3; return divisa;}
@@ -83,33 +79,35 @@ public class Consola {
     }
 
     static void registrarCliente() throws ParseException{
+        ClienteCt cliente = new ClienteCt();
         Scanner entrada = new Scanner(System.in);
         
         System.out.println("\n------------ REGISTRO DE CLIENTES ------------");
-        System.out.print("Ingrese el numero de cedula: ");
+        System.out.println("Ingrese el numero de cedula: ");
         String cedula = entrada.next();
-        System.out.print("Ingrese el nombre: ");
+        System.out.println("Ingrese el nombre: ");
         String nombre = entrada.next();
-        System.out.print("Ingrese el primer apellido: ");
+        System.out.println("Ingrese el primer apellido: ");
         String apellido1 = entrada.next();
-        System.out.print("Ingrese el segundo apellido: ");
+        System.out.println("Ingrese el segundo apellido: ");
         String apellido2 = entrada.next();
-        System.out.print("\nINFORMACION DE LA FECHA DE NACIMIENTO \n");
-        System.out.print("Ingrese la fecha del dia de nacimiento (DD): ");
+        System.out.println("\nINFORMACION DE LA FECHA DE NACIMIENTO \n");
+        System.out.println("Ingrese la fecha del dia de nacimiento (DD): ");
         String dia = entrada.next();
-        System.out.print("Ingrese la fecha del mes de nacimiento (MM): ");
+        System.out.println("Ingrese la fecha del mes de nacimiento (MM): ");
         String mes = entrada.next();
-        System.out.print("Ingrese del año de nacimiento (AAA): ");
+        System.out.println("Ingrese del año de nacimiento (AAAA): ");
         String anio = entrada.next();
-        System.out.print("\nIngrese el numero telefono: ");
+        System.out.println("\nIngrese el numero telefono: ");
         String telefono = entrada.next();
-        System.out.print("Ingrese el correo electronico (example@gmail.com): ");
+        System.out.println("Ingrese el correo electronico (example@gmail.com): ");
         String correo = entrada.next();
 
-        System.out.println("\n" + ClienteCt.registrarCliente(apellido1, apellido2, nombre, cedula, dia, mes, anio, telefono, correo));
+        System.out.println("\n" + cliente.registrarCliente(apellido1, apellido2, nombre, cedula, dia, mes, anio, telefono, correo));
     }
 
     static void menuInicio() throws java.io.IOException{
+        ActualizacionDatos.refrescarPrograma();
         boolean volverPaginaPrincipal = false;
         while (!volverPaginaPrincipal)
         {
@@ -128,10 +126,11 @@ public class Consola {
     }
 
     static Boolean opcionElegidaMenuInicio() throws java.io.IOException{
+        ActualizacionDatos.refrescarPrograma();
         int opcion;
         try{        
             Scanner entrada = new Scanner(System.in);
-            System.out.print("\nSeleccione la accion que desea realizar: ");
+            System.out.println("\nSeleccione la accion que desea realizar: ");
             opcion = entrada.nextInt();
         } catch (Exception e) {opcion = 17;}
         switch (opcion){
@@ -145,7 +144,7 @@ public class Consola {
                 menuMovimientos();
                 return false;
             case 4:
-                //menuConsultas();
+                menuConsultas();
                 return false;
             case 5:
                 return true;
@@ -159,11 +158,11 @@ public class Consola {
         Scanner entrada = new Scanner(System.in);
         
         System.out.println("\n------------ CREACION DE CUENTA BANCARIA ------------");
-        System.out.print("Ingrese el numero de cedula del cliente: ");
+        System.out.println("Ingrese el numero de cedula del cliente: ");
         String cedula = entrada.next();
-        System.out.print("Ingrese el PIN de la cuenta: ");
+        System.out.println("Ingrese el PIN de la cuenta: ");
         String pin = entrada.next();
-        System.out.print("Ingrese el saldo inicial: ");
+        System.out.println("Ingrese el saldo inicial: ");
         String saldo = entrada.next();
 
         System.out.println("\n" + CuentaBancariaCt.resgistrarCuentaBancaria(saldo, pin, cedula));
@@ -171,7 +170,7 @@ public class Consola {
 
      static void cambiarPin(){
         Scanner entrada = new Scanner(System.in);
-        
+        ClienteCt cliente = new ClienteCt();
         System.out.println("\n--------------- CAMBIO DE PIN ---------------");
         System.out.println("Ingrese el numero de cuenta: ");
         String numeroCuenta = entrada.next();
@@ -180,10 +179,11 @@ public class Consola {
         System.out.println("Ingrese el PIN nuevo de la cuenta: ");
         String pinNuevo = entrada.next();
 
-        System.out.println("\n" + ClienteCt.cambiarPin(numeroCuenta, pinActual, pinNuevo));
+        System.out.println("\n" + cliente.cambiarPin(numeroCuenta, pinActual, pinNuevo));
     }          
 
     static void menuMovimientos() throws java.io.IOException{
+        ActualizacionDatos.refrescarPrograma();
         boolean volverMenuInicio = false;
         while (!volverMenuInicio){
             System.out.println("\n--------------- MENU DE MOVIMIENTOS EN CUENTAS ---------------");
@@ -199,6 +199,7 @@ public class Consola {
     } 
 
     static Boolean opcionElegidaMenuMovimientos()  throws java.io.IOException{
+        ActualizacionDatos.refrescarPrograma();
         int opcion;
         try {
             Scanner entrada = new Scanner(System.in);
@@ -225,18 +226,19 @@ public class Consola {
 
     static void depositar() throws IOException{
         Scanner entrada = new Scanner(System.in);
+        ClienteCt cliente = new ClienteCt();
         
         System.out.println("\n---------------- DEPOSITO DE DINERO ----------------");
-        System.out.print("Ingrese el numero de cuenta a depositar: ");
+        System.out.println("Ingrese el numero de cuenta a depositar: ");
         String numeroCuenta = entrada.next();
-        System.out.print("Ingrese el monto a depositar: ");
+        System.out.println("Ingrese el monto a depositar: ");
         String monto = entrada.next();
         int divisa = opcionDivisa();
         if (divisa == 1){
-            System.out.println("\n" + ClienteCt.realizarDepositoDolares (numeroCuenta, monto));
+            System.out.println("\n" + cliente.realizarDepositoDolares (numeroCuenta, monto));
         }
         else if (divisa == 2){
-            System.out.println("\n" + ClienteCt.realizarDepositoColones (numeroCuenta, monto));
+            System.out.println("\n" + cliente.realizarDepositoColones (numeroCuenta, monto));
         }
         else{
             System.out.println("ERROR: opcion no valida!!");
@@ -245,60 +247,61 @@ public class Consola {
 
     static void retirar() throws IOException{
         Scanner entrada = new Scanner(System.in);
-        
+        ClienteCt cliente = new ClienteCt();
         System.out.println("\n------------------------- RETIRO DE DINERO -------------------------");
-        System.out.print("Ingrese el numero de cuenta a la que desea retirar dinero: ");
+        System.out.println("Ingrese el numero de cuenta a la que desea retirar dinero: ");
         String numeroCuenta = entrada.next();
-        System.out.print("Ingrese el pin de la cuenta: ");
+        System.out.println("Ingrese el pin de la cuenta: ");
         String pin = entrada.next();
-        System.out.print("Ingrese el monto a retirar: ");
+        System.out.println("Ingrese el monto a retirar: ");
         String monto = entrada.next();   
         
         int divisa = opcionDivisa();
         if (divisa == 1){
-            String palabraMensajeDolares = ClienteCt.realizarRetiroDolaresAux(numeroCuenta, pin);
+            String palabraMensajeDolares = cliente.realizarRetiroDolaresAux(numeroCuenta, pin);
         
-            System.out.print("Ingrese la palabra que le fue enviada por mensaje: ");
+            System.out.println("Ingrese la palabra que le fue enviada por mensaje: ");
             String palabraIngresadaDolares = entrada.next();  
             
-            System.out.println("\n" + ClienteCt.realizarRetiroDolares(Integer.parseInt(numeroCuenta), monto, palabraIngresadaDolares, palabraMensajeDolares));           
+            System.out.println("\n" + cliente.realizarRetiroDolares(numeroCuenta, monto, palabraIngresadaDolares, palabraMensajeDolares));           
         }
         else if (divisa == 2){
-            String palabraMensajeColones = ClienteCt.realizarRetiroColonesAux(numeroCuenta, pin);
+            String palabraMensajeColones = cliente.realizarRetiroColonesAux(numeroCuenta, pin);
         
-            System.out.print("Ingrese la palabra que le fue enviada por mensaje: ");
+            System.out.println("Ingrese la palabra que le fue enviada por mensaje: ");
             String palabraIngresadaColones = entrada.next();  
             
-            System.out.println("\n" + ClienteCt.realizarRetiroColones(Integer.parseInt(numeroCuenta), monto, palabraIngresadaColones, palabraMensajeColones));           
+            System.out.println("\n" + cliente.realizarRetiroColones(numeroCuenta, monto, palabraIngresadaColones, palabraMensajeColones));           
         }
         else{
-            System.out.print("\nERROR: opcion no valida!!");
+            System.out.println("\nERROR: opcion no valida!!");
         }    
     } 
 
     static void transferir() throws IOException{
         Scanner entrada = new Scanner(System.in);
-        
+        ClienteCt cliente = new ClienteCt();
         System.out.println("\n------------------------- TRANSFERENCIA DE DINERO -------------------------");
-        System.out.print("Ingrese el numero de cuenta origen: ");
+        System.out.println("Ingrese el numero de cuenta origen: ");
         String numeroCuentaOrigen = entrada.next();
-        System.out.print("Ingrese el pin de la cuenta: ");
+        System.out.println("Ingrese el pin de la cuenta: ");
         String pin = entrada.next();
-        System.out.print("Ingrese el monto a transferir: ");
+        System.out.println("Ingrese el monto a transferir: ");
         String monto = entrada.next();         
         
-        String palabraMensaje = ClienteCt.realizarTransferenciaAux (numeroCuentaOrigen, pin);
+        String pPalabra = cliente.realizarTransferenciaAux (numeroCuentaOrigen, pin);
         
-        System.out.print("Ingrese la palabra que le fue enviada por mensaje: ");
+        System.out.println("Ingrese la palabra que le fue enviada por mensaje: ");
         String palabraIngresada= entrada.next();    
-        System.out.print("Ingrese el numero de cuenta a depositar: ");
+        System.out.println("Ingrese el numero de cuenta a depositar: ");
         String numeroCuentaDestino = entrada.next(); 
         
-        //System.out.println("\n" + ClienteCt.realizarTransferencia(Integer.parseInt(numeroCuentaOrigen), monto, palabraIngresadaColones, palabraMensajeColones));            
+        System.out.println("\n" + cliente.realizarTransferencia(numeroCuentaOrigen, numeroCuentaDestino, monto, pin, palabraIngresada));            
     }
 
 
     static void menuConsultas() throws java.io.IOException{
+        ActualizacionDatos.refrescarPrograma();
         boolean volverMenuInicio = false;
         while (!volverMenuInicio) {
             System.out.println("------------------ MENU DE CONSULTAS ------------------");
@@ -319,6 +322,7 @@ public class Consola {
     }    
   
     static Boolean opcionElegidaMenuConsultas()  throws java.io.IOException{
+        ActualizacionDatos.refrescarPrograma();
         int opcion;
         try {
             Scanner entrada = new Scanner(System.in);
@@ -327,28 +331,28 @@ public class Consola {
         } catch (Exception e) {opcion = 17;}
         switch (opcion){
             case 1:
-                //consultarCliente();
+                consultarCliente();
                 return false;
             case 2:
-                 //consultarCuenta();
+                 consultarCuenta();
                 return false;
             case 3:
-                 //consultarTipoCambio();
+                consultarTipoCambio();
                 return false;
             case 4:
-                 //consultarSaldoCuenta();
+                 consultarSaldoCuenta();
                 return false;
             case 5:
-                 //consultarEstadoCuenta();
+                consultarEstadoCuenta();
                 return false;
             case 6:
-                 //consultarStatusCuenta();
+                 consultarStatusCuenta();
                 return false;
             case 7:
-                 //consultarGananciasTotales();
+                 consultarGananciasTotales();
                 return false;
             case 8:
-                 //consultarGananciasPorCuenta();
+                 consultarGananciasPorCuenta();
                 return false;               
             case 9:
                 return true;
@@ -356,6 +360,167 @@ public class Consola {
                 System.out.println("\nERROR: la opción elegida debe estar entre 1 y 9");
                 return false;
         }
-    }             
+    }    
     
+    static void consultarTipoCambio() throws IOException{
+        ClienteCt cliente = new ClienteCt();
+        int tipo;
+        try{
+            Scanner entrada = new Scanner(System.in);
+            System.out.println("\n------------- CONSULTA DE TIPO DE CAMBIO -------------");
+            System.out.println("  1. Compra");
+            System.out.println("  2. Venta");
+            System.out.println("\nIngrese el tipo de consulta: ");
+            tipo = entrada.nextInt();
+        }catch (Exception e) {tipo = 3;}
+
+        if (tipo == 1){
+            System.out.println("\n" + cliente.consultarTipoCambioCompra());
+        }
+        else if (tipo == 2){
+            System.out.println("\n" + cliente.consultarTipoCambioVenta());
+        }
+        else{
+            System.out.println("ERROR: opcion no disponible!!");
+        }            
+    }            
+ 
+    static void consultarSaldoCuenta() throws IOException{
+        Scanner entrada = new Scanner(System.in);
+        ClienteCt cliente = new ClienteCt();
+        System.out.println("\n---------------- CONSULTA DE SALDO ----------------");
+        System.out.println("Ingrese el numero de cuenta a consultar: ");
+        String numeroCuenta = entrada.next();
+        System.out.println("Ingrese el pin de la cuenta: ");
+        String pin = entrada.next();
+        int divisa = opcionDivisa();
+        if (divisa == 1){
+            System.out.println("\n" + cliente.consultarSaldoCuentaDolares (numeroCuenta, pin));
+        }
+        else if (divisa == 2){
+            System.out.println("\n" + cliente.consultarSaldoCuentaColones (numeroCuenta, pin));
+        }
+        else{
+            System.out.println("ERROR: opcion no valida!!");
+        }            
+    }   
+    
+    static void consultarEstadoCuenta() throws IOException{
+        Scanner entrada = new Scanner(System.in);
+        ClienteCt cliente = new ClienteCt();
+        System.out.println("\n---------------- CONSULTA DE ESTADO DE CUENTA ----------------");
+        System.out.println("Ingrese el numero de cuenta a consultar: ");
+        String numeroCuenta = entrada.next();
+        System.out.println("Ingrese el pin de la cuenta: ");
+        String pin = entrada.next();
+        int divisa = opcionDivisa();
+        if (divisa == 1){
+            System.out.println("\n" + cliente.consultarEstadoCuentaDolares (numeroCuenta, pin));
+        }
+        else if (divisa == 2){
+            System.out.println("\n" + cliente.consultarEstadoCuentaColones (numeroCuenta, pin));
+        }
+        else{
+            System.out.println("ERROR: opcion no valida!!");
+        }            
+    } 
+
+    static void consultarStatusCuenta() throws IOException{
+        Scanner entrada = new Scanner(System.in);
+        ClienteCt cliente = new ClienteCt();
+        System.out.println("\n---------------- CONSULTA DE STATUS DE CUENTA ----------------");
+        System.out.println("Ingrese el numero de cuenta a consultar: ");
+        String numeroCuenta = entrada.next();
+        System.out.println("\n" + cliente.consultarStatusCuenta (numeroCuenta));          
+    } 
+    
+     static void consultarGananciasTotales() throws IOException{
+        Scanner entrada = new Scanner(System.in);
+        int tipo;
+        try{
+            System.out.println("\n------------- CONSULTA DE GANANCIAS TOTALES POR COMISIONES-------------");
+            System.out.println("  1. Depositos y retiros totales");
+            System.out.println("  2. Depositos totales");
+            System.out.println("  3. Retiros totales");
+            System.out.println("\nIngrese el tipo de consulta: ");
+            tipo = entrada.nextInt();
+        }catch (Exception e) {tipo = 5;}
+
+        if (tipo == 1){
+            System.out.println("\n" + CuentaBancariaCt.consultarGananciasTotalesBanco());
+        }
+        else if (tipo == 2){
+            System.out.println("\n" + CuentaBancariaCt.consultarGananciasTotalesBanco());
+        }
+        else if (tipo == 3){
+            System.out.println("\n" + CuentaBancariaCt.consultarGananciasRetirosBanco());
+        }
+        else{
+            System.out.println("ERROR: opcion no disponible!!");
+        }            
+    }    
+    
+     static void consultarGananciasPorCuenta() throws IOException{
+        Scanner entrada = new Scanner(System.in);
+        CuentaBancariaCt cuenta = new CuentaBancariaCt();
+        System.out.println("Ingrese el numero de cuenta a consultar: ");
+        String numeroCuenta = entrada.next();
+        
+        int tipo;
+        try{
+            System.out.println("\n------------- CONSULTA DE GANANCIAS POR CUENTA POR COMISIONES-------------");
+            System.out.println("  1. Depositos y retiros totales");
+            System.out.println("  2. Depositos totales");
+            System.out.println("  3. Retiros totales");
+            System.out.println("\nIngrese el tipo de consulta: ");
+            tipo = entrada.nextInt();
+        }catch (Exception e) {tipo = 5;}
+
+        if (tipo == 1){
+            System.out.println("\n" + cuenta.consultarGananciasTotalesCuenta(numeroCuenta));
+        }
+        else if (tipo == 2){
+            System.out.println("\n" + cuenta.consultarGananciasDepositosCuenta(numeroCuenta));
+        }
+        else if (tipo == 3){
+            System.out.println("\n" + cuenta.consultarGananciasRetirosCuenta(numeroCuenta));
+        }
+        else{
+            System.out.println("ERROR: opcion no disponible!!");
+        } 
+    }
+     
+    static void consultarCliente() throws IOException{
+        Scanner entrada = new Scanner(System.in);
+        ClienteCt cliente = new ClienteCt();
+            
+        System.out.println("\n---------------- LISTA DE CLIENTES ORDENADOS POR APELLIDO ----------------");
+        ClienteCt datosClientes = new ClienteCt();
+        ArrayList<String> listaDatos = datosClientes.listarClientes();   
+        for (int i = 0; i < listaDatos.size(); i++){
+            System.out.println(listaDatos.get(i) + "\n" );
+        }        
+        
+        System.out.println("Ingrese el numero de cédula del cliente a consultar: ");
+        String numeroCedula = entrada.next();
+        
+        System.out.println("\n" + cliente.consultarCliente(numeroCedula)); 
+    }  
+
+    static void consultarCuenta() throws IOException{
+        CuentaBancariaCt cuenta = new CuentaBancariaCt();
+        Scanner entrada = new Scanner(System.in);
+        
+        System.out.println("\n---------------- LISTA DE CUENTAS ORDENADAS POR SALDO ----------------");
+        CuentaBancariaCt datosCuentas = new CuentaBancariaCt();
+        ArrayList<String> listaDatos = datosCuentas.listarCuentas();   
+        for (int i = 0; i < listaDatos.size(); i++){
+            System.out.println(listaDatos.get(i) + "\n" );
+        }        
+        
+        System.out.println("Ingrese el numero de cuenta de la cuenta bancaria a consultar: ");
+        String numeroCuenta = entrada.next();
+        
+        System.out.println("\n" + cuenta.consultarCuenta(numeroCuenta)); 
+    }    
 }

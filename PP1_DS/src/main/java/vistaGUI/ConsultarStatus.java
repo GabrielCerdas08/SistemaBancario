@@ -4,6 +4,10 @@
  */
 package vistaGUI;
 
+import controlador.ClienteCt;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fabih
@@ -16,6 +20,12 @@ public class ConsultarStatus extends javax.swing.JFrame {
     public ConsultarStatus() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        ClienteCt clienteCuentas = new ClienteCt();
+        ArrayList<Integer> cuentas = clienteCuentas.numCuentas();
+        for (int i = 0; i < cuentas.size(); i++){
+            cbNumeroCuenta.addItem(String.valueOf(cuentas.get(i)));
+        }
     }
 
     /**
@@ -31,9 +41,7 @@ public class ConsultarStatus extends javax.swing.JFrame {
         linea = new javax.swing.JLabel();
         btConsultar = new javax.swing.JButton();
         back = new javax.swing.JButton();
-        txtStatus = new javax.swing.JPasswordField();
         cbNumeroCuenta = new javax.swing.JComboBox<>();
-        nombre1 = new javax.swing.JLabel();
         nombre2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,7 +68,7 @@ public class ConsultarStatus extends javax.swing.JFrame {
                 btConsultarActionPerformed(evt);
             }
         });
-        getContentPane().add(btConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 160, 40));
+        getContentPane().add(btConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 160, 40));
 
         back.setBackground(new java.awt.Color(0, 102, 51));
         back.setFont(new java.awt.Font("Nirmala UI", 1, 16)); // NOI18N
@@ -73,20 +81,8 @@ public class ConsultarStatus extends javax.swing.JFrame {
         });
         getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, 30));
 
-        txtStatus.setEnabled(false);
-        txtStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStatusActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 250, 30));
-
         cbNumeroCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         getContentPane().add(cbNumeroCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 330, 30));
-
-        nombre1.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
-        nombre1.setText("Status:");
-        getContentPane().add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         nombre2.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         nombre2.setText("Seleccione el número de cuenta");
@@ -96,7 +92,11 @@ public class ConsultarStatus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
-        // TODO add your handling code here:
+        ClienteCt clienteCuentas = new ClienteCt();
+        String numCuenta = cbNumeroCuenta.getSelectedItem().toString();
+        
+        JOptionPane.showMessageDialog(null,clienteCuentas.consultarStatusCuenta(numCuenta));
+        
     }//GEN-LAST:event_btConsultarActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -104,10 +104,6 @@ public class ConsultarStatus extends javax.swing.JFrame {
         abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_backActionPerformed
-
-    private void txtStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStatusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,8 +146,6 @@ public class ConsultarStatus extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbNumeroCuenta;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel linea;
-    private javax.swing.JLabel nombre1;
     private javax.swing.JLabel nombre2;
-    private javax.swing.JPasswordField txtStatus;
     // End of variables declaration//GEN-END:variables
 }

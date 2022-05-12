@@ -39,8 +39,8 @@ public class CuentaConsultadaWeb extends HttpServlet {
                                    throws ServletException, IOException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
-    String numeroCedula = request.getParameter("NUMEROCUENTA");
-
+    String numeroCuenta = request.getParameter("NUMEROCUENTA");
+    CuentaBancariaCt cuenta = new CuentaBancariaCt();
 
     
     out.println("<!DOCTYPE html>");
@@ -49,12 +49,12 @@ public class CuentaConsultadaWeb extends HttpServlet {
     out.println("<title>Cuenta Consultada</title>");
     out.println("<meta charset='UTF-8'>");
     out.println("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
-    out.println("<link href='Inicio.css' rel='stylesheet' type='text/css'/>  "  );    
+    out.println("<link href='Inicio.css' rel='stylesheet' type='text/css'/>  "  );   
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>Cuenta Consultada</h1>");
     out.println("<hr>");
-
+    out.println(cuenta.consultarCuenta(numeroCuenta));
     out.println("<hr><a href=\"Iniciar/consultas.html\">Volver</a>");
     out.println("</body></html>");
   }

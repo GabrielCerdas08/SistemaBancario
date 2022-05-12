@@ -3,6 +3,7 @@ package vistaGUI;
 
 import controlador.ClienteCt;
 import controlador.CuentaBancariaCt;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 public class CambiarPin extends javax.swing.JFrame {
 
@@ -13,9 +14,10 @@ public class CambiarPin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        CuentaBancariaCt cuentas = new CuentaBancariaCt();
-        for (int i = 0; i < cuentas.numCuentas().size(); i++){
-            cbNumeroCuenta.addItem(String.valueOf(cuentas.numCuentas().get(i)));
+        ClienteCt clienteCuentas = new ClienteCt();
+        ArrayList<Integer> cuentas = clienteCuentas.numCuentas();
+        for (int i = 0; i < cuentas.size(); i++){
+            cbNumeroCuenta.addItem(String.valueOf(cuentas.get(i)));
         }
 
     }

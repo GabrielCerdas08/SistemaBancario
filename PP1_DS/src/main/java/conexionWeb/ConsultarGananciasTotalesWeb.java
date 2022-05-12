@@ -42,7 +42,15 @@ public class ConsultarGananciasTotalesWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>Ganancias totales</h1>");
     out.println("<hr>");
-
+    if (Integer.parseInt(tipoCuenta) == 1){
+        out.println(CuentaBancariaCt.consultarGananciasDepositosBanco());
+    }
+    else if (Integer.parseInt(tipoCuenta) == 2){
+        out.println(CuentaBancariaCt.consultarGananciasRetirosBanco());
+    }
+    else{
+        out.println(CuentaBancariaCt.consultarGananciasTotalesBanco());
+    }
     out.println("<hr><a href=\"Iniciar/consultas.html\">Volver</a>");
     out.println("</body></html>");
   }

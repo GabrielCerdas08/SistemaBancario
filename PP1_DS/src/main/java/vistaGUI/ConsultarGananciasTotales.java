@@ -4,6 +4,10 @@
  */
 package vistaGUI;
 
+import static controlador.CuentaBancariaCt.consultarGananciasDepositosBanco;
+import static controlador.CuentaBancariaCt.consultarGananciasRetirosBanco;
+import static controlador.CuentaBancariaCt.consultarGananciasTotalesBanco;
+
 /**
  *
  * @author fabih
@@ -32,9 +36,9 @@ public class ConsultarGananciasTotales extends javax.swing.JFrame {
         btConsultar = new javax.swing.JButton();
         back = new javax.swing.JButton();
         cbGanancias = new javax.swing.JComboBox<>();
-        txtGanancias = new javax.swing.JPasswordField();
         pinActual1 = new javax.swing.JLabel();
         nombre1 = new javax.swing.JLabel();
+        txtGanancias = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -81,14 +85,6 @@ public class ConsultarGananciasTotales extends javax.swing.JFrame {
         });
         getContentPane().add(cbGanancias, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 380, 30));
 
-        txtGanancias.setEnabled(false);
-        txtGanancias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGananciasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtGanancias, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 300, 30));
-
         pinActual1.setFont(new java.awt.Font("Nirmala UI", 1, 36)); // NOI18N
         pinActual1.setText("¢");
         getContentPane().add(pinActual1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
@@ -97,11 +93,25 @@ public class ConsultarGananciasTotales extends javax.swing.JFrame {
         nombre1.setText("Seleccione el tipo de consulta");
         getContentPane().add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, -1));
 
+        txtGanancias.setEditable(false);
+        getContentPane().add(txtGanancias, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 320, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         // TODO add your handling code here:
+        String tipoGanancia = cbGanancias.getSelectedItem().toString();
+        if (tipoGanancia.equals("Depositos")){
+            txtGanancias.setText(Double.toString(consultarGananciasDepositosBanco()));
+        }
+        if (tipoGanancia.equals("Retiros")){
+            txtGanancias.setText(Double.toString(consultarGananciasRetirosBanco()));
+        }
+        if (tipoGanancia.equals("Depositos y retiros")){
+            txtGanancias.setText(Double.toString(consultarGananciasTotalesBanco()));
+        }
+        
     }//GEN-LAST:event_btConsultarActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -113,10 +123,6 @@ public class ConsultarGananciasTotales extends javax.swing.JFrame {
     private void cbGananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGananciasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbGananciasActionPerformed
-
-    private void txtGananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGananciasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGananciasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,6 +167,9 @@ public class ConsultarGananciasTotales extends javax.swing.JFrame {
     private javax.swing.JLabel linea;
     private javax.swing.JLabel nombre1;
     private javax.swing.JLabel pinActual1;
-    private javax.swing.JPasswordField txtGanancias;
+    private javax.swing.JTextField txtGanancias;
+    private javax.swing.JPasswordField txtPin;
+    private javax.swing.JPasswordField txtPin1;
+    private javax.swing.JPasswordField txtPin2;
     // End of variables declaration//GEN-END:variables
 }

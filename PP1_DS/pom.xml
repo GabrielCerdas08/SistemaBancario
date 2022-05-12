@@ -17,7 +17,7 @@
         <exec.mainClass>com.mycompany.pp1_ds.PP1_DS</exec.mainClass>
     </properties>
     
-        <repositories>
+    <repositories>
         <repository>
             <id>unknown-jars-temp-repo</id>
             <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
@@ -41,6 +41,11 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+      <dependency>
+		<groupId>com.oracle</groupId>
+		<artifactId>ojdbc8</artifactId>
+		<version>19.3</version>
+	</dependency>
     </dependencies>
 
     <build>

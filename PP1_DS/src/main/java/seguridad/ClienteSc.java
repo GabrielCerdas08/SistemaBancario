@@ -2,8 +2,8 @@
 package seguridad;
 
 import java.util.ArrayList;
-import util.CorreoElectronico;
-import util.MensajeSMS;
+import comunicacionExterna.CorreoElectronico;
+import comunicacionExterna.MensajeSMS;
 import logicadenegocios.Cliente;
 
 public class ClienteSc {

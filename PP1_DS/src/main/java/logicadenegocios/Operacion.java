@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * @author fabih
  */
 public class Operacion {
-        private LocalDate fechaOperacion;
+    private LocalDate fechaOperacion;
     private String tipoOperacion;
     private double monto;
     private boolean comision;
@@ -17,20 +17,24 @@ public class Operacion {
     public Operacion(String pTipoOperacion, double pMonto,double pMontoComision) {
         setTipoOperacion(pTipoOperacion);
         setMonto(pMonto);
-        setFechaOperacion();
+        obtenerFechaActual();
         setMontoComision(pMontoComision);
         //Faltan los otros dos atributos
     }
-    
-    private LocalDate obtenerFechaActual(){
+
+    Operacion() {
+ 
+    }
+
+ 
+    private void obtenerFechaActual(){
         LocalDate fechaActual = LocalDate.now();
-        return fechaActual;
+        fechaOperacion = fechaActual;
     }
 
-    public void setFechaOperacion(){
-        fechaOperacion = obtenerFechaActual();
+    public void setFechaOperacion(LocalDate pFechaOperacion){
+        fechaOperacion = pFechaOperacion;
     }
-
     public void setTipoOperacion(String pTipoOperacion) {
         tipoOperacion = pTipoOperacion;
     }

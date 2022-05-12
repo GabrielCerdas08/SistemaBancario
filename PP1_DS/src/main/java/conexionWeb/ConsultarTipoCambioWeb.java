@@ -27,7 +27,7 @@ public class ConsultarTipoCambioWeb extends HttpServlet {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
     String divisa = request.getParameter("DIVISAS");
-
+    ClienteCt cliente = new ClienteCt();
 
     
     out.println("<!DOCTYPE html>");
@@ -42,6 +42,13 @@ public class ConsultarTipoCambioWeb extends HttpServlet {
     out.println("<h1>Tipo de Cambio</h1>");
     out.println("<hr>");
 
+    if (Integer.parseInt(divisa) == 1){
+        out.println(cliente.consultarTipoCambioCompra());
+    }
+    else{
+        out.println(cliente.consultarTipoCambioVenta());
+    }
+    
     out.println("<hr><a href=\"Iniciar/consultas.html\">Volver</a>");
     out.println("</body></html>");
   }

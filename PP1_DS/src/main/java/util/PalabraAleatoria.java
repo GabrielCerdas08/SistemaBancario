@@ -14,7 +14,8 @@ public class PalabraAleatoria {
         sb.append(tmp); 
     }  
      sb.append(String.valueOf(value));
-    System.out.println(sb);
+    
+     System.out.println(sb.toString());
     return sb.toString();
     }
     

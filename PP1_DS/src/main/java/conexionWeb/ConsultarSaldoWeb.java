@@ -42,7 +42,14 @@ public class ConsultarSaldoWeb extends HttpServlet {
     out.println("<body>");
     out.println("<h1>Saldo</h1>");
     out.println("<hr>");
-
+    ClienteCt cliente = new ClienteCt();
+    if (Integer.parseInt(divisa) == 1){
+        out.println(cliente.consultarSaldoCuentaDolares (numeroCuenta, pin));
+    }
+    else{
+        out.println(cliente.consultarSaldoCuentaColones (numeroCuenta, pin));
+    }
+    
     out.println("<hr><a href=\"Iniciar/consultas.html\">Volver</a>");
     out.println("</body></html>");
   }

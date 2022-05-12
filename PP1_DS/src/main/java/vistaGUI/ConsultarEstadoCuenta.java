@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package vistaGUI;
+
+import controlador.ClienteCt;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +17,12 @@ public class ConsultarEstadoCuenta extends javax.swing.JFrame {
     public ConsultarEstadoCuenta() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        ClienteCt clienteCuentas = new ClienteCt();
+        ArrayList<Integer> cuentas = clienteCuentas.numCuentas();
+        for (int i = 0; i < cuentas.size(); i++){
+            cbNumeroCuenta.addItem(String.valueOf(cuentas.get(i)));
+        }
     }
 
     /**
@@ -37,8 +44,6 @@ public class ConsultarEstadoCuenta extends javax.swing.JFrame {
         nombre1 = new javax.swing.JLabel();
         txtPin = new javax.swing.JPasswordField();
         nombre2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableEstadoCuenta = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,7 +69,7 @@ public class ConsultarEstadoCuenta extends javax.swing.JFrame {
                 btConsultarActionPerformed(evt);
             }
         });
-        getContentPane().add(btConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 160, 40));
+        getContentPane().add(btConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 160, 40));
 
         back.setBackground(new java.awt.Color(0, 102, 51));
         back.setFont(new java.awt.Font("Nirmala UI", 1, 16)); // NOI18N
@@ -75,7 +80,7 @@ public class ConsultarEstadoCuenta extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 170, 30));
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 170, 30));
 
         nombre.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         nombre.setText("PIN");
@@ -101,32 +106,21 @@ public class ConsultarEstadoCuenta extends javax.swing.JFrame {
         nombre2.setText("Divisa");
         getContentPane().add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
 
-        tableEstadoCuenta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Dueño", "Fecha de Creación", "Número de Cuenta", "Saldo"
-            }
-        ));
-        jScrollPane1.setViewportView(tableEstadoCuenta);
-        if (tableEstadoCuenta.getColumnModel().getColumnCount() > 0) {
-            tableEstadoCuenta.getColumnModel().getColumn(0).setHeaderValue("Dueño");
-            tableEstadoCuenta.getColumnModel().getColumn(1).setHeaderValue("Fecha de Creación");
-            tableEstadoCuenta.getColumnModel().getColumn(2).setHeaderValue("Número de Cuenta");
-            tableEstadoCuenta.getColumnModel().getColumn(3).setHeaderValue("Saldo");
-        }
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 590, 170));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         // TODO add your handling code here:
+        String numCuenta = cbNumeroCuenta.getSelectedItem().toString();
+        String tipoDivisa = cbDivisa.getSelectedItem().toString();
+        String pin = txtPin.getText();
+        ClienteCt cliente = new ClienteCt();
+        if (tipoDivisa.equals("Colones")){
+            JOptionPane.showMessageDialog(null,cliente.consultarEstadoCuentaColones(numCuenta,pin));   
+        }
+        if (tipoDivisa.equals("Dolares")){
+            JOptionPane.showMessageDialog(null,cliente.consultarEstadoCuentaDolares(numCuenta,pin));
+        }
     }//GEN-LAST:event_btConsultarActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -180,12 +174,10 @@ public class ConsultarEstadoCuenta extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbDivisa;
     private javax.swing.JComboBox<String> cbNumeroCuenta;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel linea;
     private javax.swing.JLabel nombre;
     private javax.swing.JLabel nombre1;
     private javax.swing.JLabel nombre2;
-    private javax.swing.JTable tableEstadoCuenta;
     private javax.swing.JPasswordField txtPin;
     // End of variables declaration//GEN-END:variables
 }

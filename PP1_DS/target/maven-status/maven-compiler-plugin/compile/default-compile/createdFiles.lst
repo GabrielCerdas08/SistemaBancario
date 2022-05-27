@@ -23,7 +23,6 @@ vistaGUI\ConsultarTipoCambio$2.class
 validaciones\ValidacionCuenta.class
 vistaGUI\RegistrarCliente$3.class
 vistaGUI\PaginaPrincipal$1.class
-util\ObtencionXML.class
 vistaGUI\ConsultarEstadoCuenta$4.class
 vistaGUI\ConsultarTipoCambio$5.class
 vistaGUI\MenuOperaciones.class
@@ -31,7 +30,6 @@ vistaGUI\Transferir$1.class
 conexionWeb\ConsultarStatusWeb.class
 vistaGUI\PaginaPrincipal$4.class
 vistaGUI\RegistrarCliente$9.class
-util\CambioMoneda.class
 vistaGUI\ConsultarSaldo$4.class
 vistaGUI\Depositar$1.class
 conexionWeb\TransferirWeb.class
@@ -56,7 +54,6 @@ vistaGUI\ConsultarGananciasTotales$1.class
 vistaGUI\ListarCuentasOrdenadas$1.class
 vistaGUI\RegistrarCliente$1.class
 vistaGUI\AbrirCuentaBancaria$2.class
-util\CorreoElectronico.class
 vistaGUI\ConsultarSaldo$3.class
 vistaGUI\MenuConsultas$4.class
 vistaGUI\RegistrarCliente$8.class
@@ -97,7 +94,6 @@ vistaGUI\ConsultarStatus$3.class
 vistaGUI\Transferir$5.class
 vistaGUI\ListarCuentasOrdenadas$3.class
 vistaGUI\ListarCuentasOrdenadas.class
-util\ConexionWebService.class
 vistaGUI\ConsultarGananciasTotales$3.class
 vistaGUI\MenuPrincipal$6.class
 vistaGUI\ConsultarGananciasPorCuenta$1.class
@@ -111,7 +107,6 @@ util\PalabraAleatoria.class
 vistaGUI\AbrirCuentaBancaria$4.class
 vistaGUI\MenuOperaciones$5.class
 vistaGUI\ConsultarStatus.class
-util\MensajeSMS.class
 vistaGUI\MenuOperaciones$1.class
 vistaGUI\ConsultarGananciasPorCuenta$3.class
 DAO\CuentaBancariaDAO.class

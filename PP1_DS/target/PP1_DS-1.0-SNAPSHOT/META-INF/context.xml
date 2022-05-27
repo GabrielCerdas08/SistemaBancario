@@ -6,7 +6,7 @@
     username="administrador"
     password="diseno2022!"
     driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url="jdbc:jtds:sqlserver://localhost:1433/BDBanco"
+    url="jdbc:jtds:sqlserver://localhost:1433/database=BDBanco"
     maxTotal="25"
     maxIdle="10"
     validationQuery="select 1" />

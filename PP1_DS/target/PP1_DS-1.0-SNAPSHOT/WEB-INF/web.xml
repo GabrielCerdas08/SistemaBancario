@@ -11,6 +11,7 @@
         <servlet-name>RegistrarClienteWeb</servlet-name>
         <url-pattern>/RegistrarClienteWeb</url-pattern>
     </servlet-mapping>
+    
 
     
     <session-config>
